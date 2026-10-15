@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXA 2.0</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">NEXA <span>2.0</span></h1>
+        <button id="newChatBtn" class="btn primary">+ New Chat</button>
+      </div>
+      <div class="search-box">
+        <input type="text" id="searchChats" placeholder="Search chats...">
+      </div>
+      <div id="chatList" class="chat-list"></div>
+      <div class="sidebar-footer">
+        <button id="toolsBtn" class="btn ghost">Tools</button>
+        <button id="settingsBtn" class="btn ghost">Settings</button>
+        <div class="creator">CREATED BY MESSIAH_V</div>
+      </div>
+    </aside>
+    <main id="main">
+      <header class="topbar">
+        <button id="toggleSidebar" class="btn icon">☰</button>
+        <select id="modeSelect">
+          <option value="normal">Normal Chat</option>
+          <option value="study">Study Mode</option>
+          <option value="coding">Coding Mode</option>
+          <option value="research">Research Mode</option>
+          <option value="creative">Creative Mode</option>
+          <option value="job">Job Mode</option>
+          <option value="quick">Quick Answer</option>
+          <option value="deep">Deep Analysis</option>
+        </select>
+        <button id="themeBtn" class="btn icon" title="Toggle theme">☾</button>
+      </header>
+      <div id="chatArea" class="chat-area">
+        <div id="welcome" class="welcome">
+          <h2>Welcome to NEXA 2.0</h2>
+          <p>Your personal AI assistant &amp; productivity workspace</p>
+          <div class="quick-actions">
+            <button class="quick-btn" data-mode="study">Study Help</button>
+            <button class="quick-btn" data-mode="coding">Code Help</button>
+            <button class="quick-btn" data-tool="job">Job Analyzer</button>
+            <button class="quick-btn" data-tool="food">Indian Food</button>
+          </div>
+        </div>
+        <div id="messages" class="messages"></div>
+      </div>
+      <div class="input-area">
+        <div class="input-wrapper">
+          <textarea id="userInput" placeholder="Message NEXA..." rows="1"></textarea>
+          <button id="sendBtn" class="btn send">➤</button>
+        </div>
+        <div class="input-hint">Press Enter to send • Shift+Enter for new line</div>
+      </div>
+    </main>
+    <div id="modalOverlay" class="modal-overlay hidden">
+      <div id="modal" class="modal">
+        <div class="modal-header">
+          <h3 id="modalTitle"></h3>
+          <button id="closeModal" class="btn icon">×</button>
+        </div>
+        <div id="modalBody" class="modal-body"></div>
+      </div>
+    </div>
+  </div>
+  <script src="/js/app.js"></script>
+</body>
+</html>

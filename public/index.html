@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10111b">
+  <title>NEXA 2.0 — AI Workspace</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">NEXA <span>2.0</span></h1>
+        <button id="newChatBtn" class="btn primary">
+          <i class="fas fa-plus"></i> New Chat
+        </button>
+      </div>
+
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input id="searchChats" type="text" placeholder="Search chats...">
+      </div>
+
+      <div class="sidebar-label">YOUR CONVERSATIONS</div>
+      <div id="chatList" class="chat-list"></div>
+
+      <div class="sidebar-footer">
+        <button id="toolsBtn" class="btn ghost">
+          <i class="fas fa-toolbox"></i> Productivity Tools
+        </button>
+        <button id="settingsBtn" class="btn ghost">
+          <i class="fas fa-sliders"></i> Settings
+        </button>
+        <div class="creator">CREATED BY MESSIAH_V</div>
+      </div>
+    </aside>
+
+    <main id="main">
+      <header class="topbar">
+        <button id="toggleSidebar" class="btn icon" title="Toggle sidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="mode-selector">
+          <i class="fas fa-wand-magic-sparkles"></i>
+          <select id="modeSelect" aria-label="Assistant mode">
+            <option value="normal">Normal Chat</option>
+            <option value="study">Study Mode</option>
+            <option value="coding">Coding Mode</option>
+            <option value="research">Research Mode</option>
+            <option value="creative">Creative Mode</option>
+            <option value="job">Job Mode</option>
+            <option value="quick">Quick Answer</option>
+            <option value="deep">Deep Analysis</option>
+          </select>
+        </div>
+
+        <div class="top-actions">
+          <span class="status-indicator">
+            <span class="status-dot"></span> Local Workspace
+          </span>
+          <button id="themeBtn" class="btn icon" title="Toggle theme">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </header>
+
+      <section id="chatArea" class="chat-area">
+        <div id="welcome" class="welcome">
+          <div class="welcome-icon">
+            <i class="fas fa-atom"></i>
+          </div>
+          <p class="eyebrow">YOUR PERSONAL AI WORKSPACE</p>
+          <h2>Welcome to <span class="gradient-text">NEXA 2.0</span></h2>
+          <p class="welcome-description">
+            Think smarter. Learn faster. Create more.
+          </p>
+
+          <div class="quick-actions">
+            <button class="quick-btn" data-mode="study">
+              <i class="fas fa-graduation-cap"></i>
+              <span>Study Help</span>
+              <small>Learn and understand</small>
+            </button>
+            <button class="quick-btn" data-mode="coding">
+              <i class="fas fa-code"></i>
+              <span>Code Assistant</span>
+              <small>Build and debug</small>
+            </button>
+            <button class="quick-btn" data-tool="job">
+              <i class="fas fa-briefcase"></i>
+              <span>Job Analyzer</span>
+              <small>Match skills to jobs</small>
+            </button>
+            <button class="quick-btn" data-tool="food">
+              <i class="fas fa-utensils"></i>
+              <span>Indian Food</span>
+              <small>Discover meal ideas</small>
+            </button>
+          </div>
+        </div>
+
+        <div id="messages" class="messages" aria-live="polite"></div>
+      </section>
+
+      <section class="input-area">
+        <div class="input-container">
+          <div class="input-wrapper">
+            <textarea
+              id="userInput"
+              rows="1"
+              maxlength="12000"
+              placeholder="Message NEXA..."
+              aria-label="Message NEXA"
+            ></textarea>
+            <button id="sendBtn" class="btn send" title="Send message">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+          </div>
+          <div class="input-footer">
+            <span><i class="fas fa-shield-halved"></i> Your API key stays on your local server</span>
+            <span>Enter to send · Shift+Enter for a new line</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="modalOverlay" class="modal-overlay hidden">
+      <section id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <header class="modal-header">
+          <h3 id="modalTitle">NEXA Tools</h3>
+          <button id="closeModal" class="btn icon" title="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </header>
+        <div id="modalBody" class="modal-body"></div>
+      </section>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
