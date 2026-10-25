@@ -313,6 +313,28 @@
 
   function openSettings() {
     showModal("NEXA Settings", `
+      <div class="theme-settings-group">
+        <label>Choose your NEXA design</label>
+        <div class="theme-choice-row">
+          <button type="button" class="theme-choice" data-theme-family="aurora">
+            <span class="theme-swatch aurora"></span>
+            <strong>Aurora</strong>
+            <small>Futuristic • Midnight • Cyan and violet</small>
+          </button>
+          <button type="button" class="theme-choice" data-theme-family="bloom">
+            <span class="theme-swatch bloom"></span>
+            <strong>Bloom</strong>
+            <small>Warm • Friendly • Lavender and mint</small>
+          </button>
+        </div>
+      </div>
+      <div class="theme-settings-group">
+        <label for="settings-theme">Appearance</label>
+        <select id="settings-theme">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </div>
       <label for="settings-mode">Default mode</label>
       <select id="settings-mode">
         <option value="normal">Normal Chat</option><option value="study">Study Mode</option><option value="coding">Coding Mode</option>
@@ -322,13 +344,45 @@
       <button id="settings-save" class="btn primary" type="button">Save Settings</button>
       <button id="settings-clear" class="btn ghost" type="button">Clear Saved Chats</button>
     `, true);
+
+    let selectedFamily = state.settings.themeFamily === "bloom" ? "bloom" : "aurora";
+
+    const updateThemeChoices = () => {
+      document.querySelectorAll("[data-theme-family]").forEach(button => {
+        button.setAttribute("aria-pressed", String(button.dataset.themeFamily === selectedFamily));
+      });
+    };
+
+    document.querySelectorAll("[data-theme-family]").forEach(button => {
+      button.addEventListener("click", () => {
+        selectedFamily = button.dataset.themeFamily;
+        updateThemeChoices();
+        state.settings.themeFamily = selectedFamily;
+        applyTheme();
+        saveSettings();
+      });
+    });
+
+    $("settings-theme").value = state.settings.theme || "dark";
+    $("settings-theme").addEventListener("change", () => {
+      state.settings.theme = $("settings-theme").value;
+      applyTheme();
+      saveSettings();
+    });
+
+    updateThemeChoices();
     $("settings-mode").value = state.settings.mode || "normal";
+
     $("settings-save")?.addEventListener("click", () => {
+      state.settings.themeFamily = selectedFamily;
+      state.settings.theme = $("settings-theme").value;
       state.settings.mode = $("settings-mode").value;
       $("modeSelect").value = state.settings.mode;
+      applyTheme();
       saveSettings();
       closeModal();
     });
+
     $("settings-clear")?.addEventListener("click", () => {
       if (confirm("Clear all saved chats?")) {
         state.chats = [];
@@ -339,13 +393,21 @@
       }
     });
   }
-
   function applyTheme() {
-    document.body.classList.toggle("light", state.settings.theme === "light");
-    const icon = $("themeBtn")?.querySelector("i");
-    if (icon) icon.className = state.settings.theme === "light" ? "fas fa-sun" : "fas fa-moon";
-  }
+    const family = state.settings.themeFamily === "bloom" ? "bloom" : "aurora";
+    const theme = state.settings.theme === "light" ? "light" : "dark";
 
+    state.settings.themeFamily = family;
+    state.settings.theme = theme;
+
+    document.body.classList.remove("theme-aurora", "theme-bloom");
+    document.body.classList.add(`theme-${family}`);
+    document.body.classList.toggle("light", theme === "light");
+
+    const icon = $("themeBtn")?.querySelector("i");
+    if (icon) icon.className = theme === "light" ? "fas fa-sun" : "fas fa-moon";
+    $("themeBtn")?.setAttribute("aria-label", `Switch to ${theme === "light" ? "dark" : "light"} appearance`);
+  }
   function closeSidebarOnMobile() {
     if (window.innerWidth <= 800) $("sidebar")?.classList.remove("open");
   }
